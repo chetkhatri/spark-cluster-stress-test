@@ -5,6 +5,7 @@ package com.chetan.spark.stresstest
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.spark.sql.{SparkSession, SaveMode}
 import org.apache.spark.sql.functions.broadcast
+import com.chetan.spark.stresstest.DataFrameUtils._
 import org.slf4j.LoggerFactory
 object SampleSparkJob {
   val APP_NAME: String = "spark-job-stress-tester"
@@ -41,6 +42,7 @@ object SampleSparkJob {
     val finalDFCSV = spark.read.option("inferSchema", "true").csv("/sample-spark-df/finalDS.csv")
     logger.info("########  show finalDFCSV #########")
     finalDFCSV.show()
-
+    logger.info("######## show Profiling #######")
+    finalDFCSV.profile.show()
   }
 }
